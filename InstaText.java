@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-//Janardhann Maithil 10-Feb-2015
+//Janardhan Maithil 10-Feb-2015
 public class InstaText {
 
 	private static List<String> m_arrString;
