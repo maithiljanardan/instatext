@@ -8,11 +8,11 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-//Janardhan Maithil 10-Feb-2015
+//Janardhann Maithil 10-Feb-2015
 public class InstaText {
 
 	private static List<String> m_arrString;
-	private static int[] failure;
+	private static int[] m_arrFailure;
 
 	public static void main(String[] args) {
 		try {
@@ -61,12 +61,12 @@ public class InstaText {
 
 	}
 
-	private static boolean doMatch(String text, String pat) {
+	private static boolean doMatch(String l_strText, String l_strPatter) {
 
-		failure = new int[pat.length()];
-		fail(pat);
+		m_arrFailure = new int[l_strPatter.length()];
+		fail(l_strPatter);
 		// find match
-		int pos = posMatch(text, pat);
+		int pos = posMatch(l_strText, l_strPatter);
 		if (pos == -1)
 			return false;
 		else
@@ -74,36 +74,36 @@ public class InstaText {
 
 	}
 
-	private static int posMatch(String text, String pat) {
+	private static int posMatch(String l_strText, String l_strPatter) {
 
 		int i = 0, j = 0;
-		int lens = text.length();
-		int lenp = pat.length();
+		int lens = l_strText.length();
+		int lenp = l_strPatter.length();
 		while (i < lens && j < lenp) {
-			if (text.charAt(i) == pat.charAt(j)) {
+			if (l_strText.charAt(i) == l_strPatter.charAt(j)) {
 				i++;
 				j++;
 			} else if (j == 0)
 				i++;
 			else
-				j = failure[j - 1] + 1;
+				j = m_arrFailure[j - 1] + 1;
 		}
 		return ((j == lenp) ? (i - lenp) : -1);
 
 	}
 
-	private static void fail(String pat) {
+	private static void fail(String l_strPatter) {
 
-		int n = pat.length();
-		failure[0] = -1;
+		int n = l_strPatter.length();
+		m_arrFailure[0] = -1;
 		for (int j = 1; j < n; j++) {
-			int i = failure[j - 1];
-			while ((pat.charAt(j) != pat.charAt(i + 1)) && i >= 0)
-				i = failure[i];
-			if (pat.charAt(j) == pat.charAt(i + 1))
-				failure[j] = i + 1;
+			int i = m_arrFailure[j - 1];
+			while ((l_strPatter.charAt(j) != l_strPatter.charAt(i + 1)) && i >= 0)
+				i = m_arrFailure[i];
+			if (l_strPatter.charAt(j) == l_strPatter.charAt(i + 1))
+				m_arrFailure[j] = i + 1;
 			else
-				failure[j] = -1;
+				m_arrFailure[j] = -1;
 		}
 	}
 
@@ -119,7 +119,7 @@ public class InstaText {
 	}
 
 	private static void removePronouns(List<String> m_arrString) {
-		String l_strPronouns = "whowhichwhosethisthatsheryoumeminemyselfthemtheir";
+		String l_strPronouns = "whilewhomwhichwhosethisthattheirtheythemsherhimyourmeminemyselfwhenwhatwhere";
 		doFinishing(l_strPronouns);
 	}
 
@@ -134,13 +134,13 @@ public class InstaText {
 	}
 
 	private static void removeSpecialCharacters(List<String> m_arrString2) {
-		String l_strSpecialCharacters = "~`!@#$%^&*()_+=,-{}[]||;:'<>?,./";
+		String l_strSpecialCharacters = "~`!@#$%^&*()_+=-{}[]||;:'<>?,./";
 		doFinishing(l_strSpecialCharacters);
 
 	}
 
 	private static void removeMisc(List<String> m_arrString2) {
-		String l_strMisc = "hashaveisamare";
+		String l_strMisc = "hashaveisamarewaswerenotifelseso";
 		doFinishing(l_strMisc);
 
 	}
